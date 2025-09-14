@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-100);
+    color: var(--text-100);
+}
+
+:root {
+    --primary-100: #0D6E6E;
+    --primary-200: #4a9d9c;
+    --primary-300: #afffff;
+    --accent-100: #FF3D3D;
+    --accent-200: #ffe0c8;
+    --text-100: #FFFFFF;
+    --text-200: #e0e0e0;
+    --bg-100: #0D1F2D;
+    --bg-200: #1d2e3d;
+    --bg-300: #354656;
+}
+
+#openBtn{
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    border: none;
+    background-color: var(--primary-100);
+    color: var(--text-100);
+}
+
+#openBtn:hover{
+    background-color: var(--primary-200);
+    cursor: pointer;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+
+}
+
+.modal-content {
+    background-color: var(--bg-200);
+    padding: 1rem;
+    border-radius: 1rem;
+    
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+}
+
+input, textarea{
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: var(--bg-100);
+    color: var(--text-100);
+}
+
+label{
+    margin-top: 1rem;
+}
+
+.closeBtn{
+    position: absolute;
+    color: var(--text-100);
+    top: 0.3rem;
+    right: 0.3rem;
+    border: none;
+    background-color: transparent;
+    border: none;
+}
+
+form button{
+    background-color: var(--primary-100);
+    padding: 0.5rem;
+    color: var(--text-100);
+    margin-top: 1rem;
+    border: none;
+}
