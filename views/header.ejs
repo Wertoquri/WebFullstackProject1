@@ -1,0 +1,10 @@
+<header>
+    <h1>Zochka market</h1>
+    <% if (new Date().getHours() < 12) {-%>
+    <p>Good morning!</p>
+    <% } else if (new Date().getHours() < 18) {-%>
+    <p>Good afternoon!</p>
+    <% } else { -%>
+    <p>Good evening!</p>
+    <% } %>
+</header>
