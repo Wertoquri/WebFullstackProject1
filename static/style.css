@@ -90,6 +90,31 @@ form button{
     padding: 0.5rem;
     color: var(--text-100);
     margin-top: 1rem;
-    border: none;
+    text-align: center;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 
+form #image{
+    display: none;
+} 
+
+form .image-label{
+    background-color: var(--primary-100);
+    padding: 0.5rem;
+    color: var(--text-100);
+    margin-top: 1rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.ads img {
+    width: 100%;
+}
