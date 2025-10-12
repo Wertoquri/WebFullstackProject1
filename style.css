@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-100:#d4eaf7;
+    --primary-200:#b6ccd8;
+    --primary-300:#3b3c3d;
+    --accent-100:#71c4ef;
+    --accent-200:#00668c;
+    --text-100:#1d1c1c;
+    --text-200:#313d44;
+    --bg-100:#fffefb;
+    --bg-200:#f5f4f1;
+    --bg-300:#cccbc8;  
+}
+
+body {
+    background-color: var(--bg-100);
+    font-family: serif;
+    color: var(--text-100);
+}
+
+#openBtn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    border: none;
+    background-color: var(--accent-100);
+    color: var(--bg-100);
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-content {
+    background-color: var(--bg-200);
+    padding: 1rem;
+    border-radius: 1rem;
+} 
+
+form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+input, textarea {
+    border: none; 
+    padding: 1rem;
+    border: 5px;
+}
+
+label {
+    margin-top: 1rem;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.3rem;
+    background-color: transparent;
+    border: none;
+}
+
+form button {
+    background-color: var(--accent-100);
+    padding: 0.5rem;
+    color: var(--bg-100);
+    margin-top: 1rem;
+    border: none;
+}
+
+form #image {
+    display: none;
+}
+
+form .image-label {
+    background-color: var(--accent-100);
+    padding: 0.5rem;
+    color: var(--bg-100);
+    margin-top: 1rem;
+    border: none;
+    text-align: center;
+}
+
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.ads img {
+    width: 100%;
+}

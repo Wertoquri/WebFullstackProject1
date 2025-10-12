@@ -1,46 +1,55 @@
-let express = require('express');
-const multer = require('multer');
-const path = require('path');
+let express = require("express")
+const multer = require("multer")
+const path = require("path")
 
-let ads = [];
-let app = express();
-let port = 3000;
+let app = express()
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/');
+    destination: (req, file, cb)=>{
+        cb(null, "uploads/")
     },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname)); // Appending extension
+    filename: (req, file, cb)=>{
+        cb(null, Date.now() + path.extname(file.originalname))
     }
-});
-const upload = multer({storage});
-app.use(express.static('static'));
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-app.set('view engine', 'ejs');
-app.set('views', './views');
+})
+const upload = multer({storage})
 
-app.get('/', (req, res) => {
-    res.render('index', {products: ads});
-});
 
-app.post('/add', upload.fields([{name:"image"}]), (req, res) => {
-    let data = req.body;
-    data.image = req.files.image.map((file) => file.filename);
-    data.id = ads.length;
-    ads.push(data);
-    res.send({status: 'success' });
-});
+let ads = []
 
-app.use((req, res, next) => {
-    res.status(404);
-    res.render('notfound');
-    next();
-});
+app.use(express.static("static"))
+app.use(express.json())
+app.set("views", "views")
+app.use(express.urlencoded({extended: true}))
+app.set("view engine", "ejs")
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+app.get("/", (req, res)=>{
+    res.render("index", {products: ads})
+})
+
+app.get("/post/:id", (req, res)=>{
+    let postId = req.params.id
+    if (!ads[postId]) {
+        res.render("notFound")
+        return
+    }
+    res.render("post", {product: ads[postId]})
+})
+
+app.post("/add", upload.fields([{name: "image"}]), (req, res)=>{
+    let data = {...req.body}
+    console.log(data)
+    data.image = req.files.image.map((file)=>file.filename)
+    data.id = ads.length
+    ads.push(data)
+    res.send({status: "ok"})
+})
+
+app.use((req, res, next)=>{
+    res.status(404)
+    res.render("notFound")
+})
+
+app.listen(3000, ()=>console.log("Server on!"))
