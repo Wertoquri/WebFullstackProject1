@@ -1,7 +1,7 @@
 let express = require("express")
 const multer = require("multer")
 const path = require("path")
-
+let db = require("./db")
 let app = express()
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
@@ -16,18 +16,11 @@ const storage = multer.diskStorage({
 })
 const upload = multer({storage})
 
-
-let ads = []
-
 app.use(express.static("static"))
 app.use(express.json())
 app.set("views", "views")
 app.use(express.urlencoded({extended: true}))
 app.set("view engine", "ejs")
-
-app.get("/", (req, res)=>{
-    res.render("index", {products: ads})
-})
 
 app.get("/post/:id", (req, res)=>{
     let postId = req.params.id
@@ -38,13 +31,27 @@ app.get("/post/:id", (req, res)=>{
     res.render("post", {product: ads[postId]})
 })
 
+
 app.post("/add", upload.fields([{name: "image"}]), (req, res)=>{
     let data = {...req.body}
     console.log(data)
     data.image = req.files.image.map((file)=>file.filename)
-    data.id = ads.length
-    ads.push(data)
-    res.send({status: "ok"})
+    data.image = JSON.stringify(data.image)
+    
+    db.query(`INSERT INTO table_1 SET ?`, data, (err)=>{
+        res.status(201)
+        res.send({status: "ok"})
+    })
+})
+
+app.get("/", (req, res)=>{
+    db.query(`SELECT * FROM table_1`, (err, rows)=>{
+        let products = rows
+        products.forEach((product)=>{
+            product.image = JSON.parse(product.image)
+        })
+        res.render("index", {products})
+    })
 })
 
 app.use((req, res, next)=>{
