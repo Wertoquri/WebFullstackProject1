@@ -13,12 +13,40 @@ document.querySelector("#openBtn").addEventListener("click", ()=>{
     document.querySelector(".modal").style.display = "grid"
 })
 
-// fetch("/ads").then(res=>res.json()).then(data=>{
-//     console.log(data)
-//     document.querySelector(".wrapper").innerHTML = data.map(el=>`
-//         <div class="ads">
-//             <h3>${el.title}</h3>
-//             <p>${el.desc}</p>
-//         </div>
-//         `).join("")
-// })
+
+document.addEventListener('DOMContentLoaded', () => {
+    const parallaxBg = document.querySelector('.parallax-bg');
+    if (!parallaxBg) return;
+
+    let ticking = false;
+    
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const scrolled = window.pageYOffset;
+                parallaxBg.style.transform = `translate3d(0, ${scrolled * 0.3}px, 0)`;
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const mouseX = e.clientX / window.innerWidth - 0.5;
+                const mouseY = e.clientY / window.innerHeight - 0.5;
+                
+                parallaxBg.style.transform = `
+                    translate3d(
+                        ${mouseX * 20}px,
+                        ${window.pageYOffset * 0.3 + mouseY * 20}px,
+                        0
+                    )
+                `;
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+});

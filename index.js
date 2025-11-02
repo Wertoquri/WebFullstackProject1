@@ -21,6 +21,7 @@ app.use(express.json())
 app.set("views", "views")
 app.use(express.urlencoded({ extended: true }))
 app.set("view engine", "ejs")
+app.use('/images', express.static(path.join(__dirname, 'static/images')));
 
 app.get("/post/:id", (req, res) => {
     let postId = req.params.id
@@ -31,7 +32,14 @@ app.get("/post/:id", (req, res) => {
         let product = result[0]
         console.log(result)
         product.image = JSON.parse(product.image)
-        res.status(200).render("post", { product })
+        let comments = result.map(p => {
+            return {
+                id: p.commenId,
+                author: p.author,
+                text: p.comment
+            }
+        })
+        res.status(200).render("post", { product, comments })
     })
 })
 
