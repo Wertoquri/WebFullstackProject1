@@ -9,7 +9,6 @@ body {
     background-color: $bg-100;
     font-family: 'Creepster', cursive;
     color: $text-100;
-    background: url('/images/bg.jpg');
     background-repeat: repeat;
 }
 
@@ -184,7 +183,6 @@ form {
         content: '';
         position: absolute;
         inset: 0;
-        background: url('/images/bg.jpg');
         opacity: 0.08;
         mix-blend-mode: overlay;
     }

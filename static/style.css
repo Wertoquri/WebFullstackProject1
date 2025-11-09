@@ -264,7 +264,6 @@ body {
   background-color: #1a1a1a;
   font-family: "Creepster", cursive;
   color: #ffffff;
-  background: url("/images/bg.jpg");
   background-repeat: repeat;
 }
 
@@ -421,7 +420,6 @@ form .image-label:hover {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("/images/bg.jpg");
   opacity: 0.08;
   mix-blend-mode: overlay;
 }
